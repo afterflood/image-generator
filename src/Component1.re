@@ -1,5 +1,21 @@
 let str = React.string;
 
+let foodImg: string = [%raw "require('./food.png')"];
+
+let helpImg: string = [%raw "require('./help.png')"];
+
+type selectedImage =
+  | Food
+  | Help;
+
+let selectedClasses = bool =>
+  bool ? "p-4 border shadow bg-yellow-100" : "p-4 border shadow ";
+
+let renderImage = image =>
+  switch (image) {
+  | Food => foodImg
+  | Help => helpImg
+  };
 let renderForm =
     (
       time,
@@ -10,9 +26,26 @@ let renderForm =
       setCaption1,
       caption2,
       setCaption2,
+      image,
+      setImage,
     ) =>
   <div>
     <div className="text-2xl font-semibold"> {"Image Generator" |> str} </div>
+    <label className="block mb-2 mt-4" htmlFor="caption1">
+      {"Select Image" |> str}
+    </label>
+    <div className="w-full mt-4 w-full mt-4 flex px-10 justify-between">
+      <div
+        onClick={_ => setImage(_ => Food)}
+        className={selectedClasses(image == Food)}>
+        <img src=foodImg />
+      </div>
+      <div
+        onClick={_ => setImage(_ => Help)}
+        className={selectedClasses(image == Help) ++ " ml-2"}>
+        <img src=helpImg />
+      </div>
+    </div>
     <div className="w-full mt-4">
       <label className="block mb-2" htmlFor="caption1">
         {"Location" |> str}
@@ -63,9 +96,9 @@ let renderForm =
     </div>
   </div>;
 
-let renderView = (caption1, caption2, time, numbers) =>
-  <div className="w-full bg-white" id="image-to-print">
-    <div className="text-2xl font-semibold"> {"Image" |> str} </div>
+let renderView = (caption1, caption2, time, numbers, image) =>
+  <div className="flex flex-col w-full items-center justifycenter">
+    <div className="px-10"> <img src={renderImage(image)} /> </div>
     <div className="text-2xl font-semibold"> {caption1 |> str} </div>
     <div className="text-4xl font-bold"> {caption2 |> str} </div>
     <div className="text-md"> {"Message recieved at " ++ time |> str} </div>
@@ -80,12 +113,14 @@ let make = () => {
   let (caption1, setCaption1) = React.useState(() => "");
   let (caption2, setCaption2) = React.useState(() => "");
   let (time, setTime) = React.useState(() => "");
+  let (image, setImage) = React.useState(() => Food);
   let (numbers, setNumbers) = React.useState(() => "");
   let elementId = "image-to-print";
   <div
     className="h-screen flex flex-col justify-center items-center flex-wrap bg-white">
     <div
-      className="max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10">
+      id="image-to-print"
+      className="bg-white max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10">
       {
         showForm ?
           <div>
@@ -99,10 +134,12 @@ let make = () => {
                 setCaption1,
                 caption2,
                 setCaption2,
+                image,
+                setImage,
               )
             }
           </div> :
-          <div> {renderView(caption1, caption2, time, numbers)} </div>
+          <div> {renderView(caption1, caption2, time, numbers, image)} </div>
       }
     </div>
     <div className="flex justify-between">

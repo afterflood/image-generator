@@ -9,10 +9,55 @@ function str(prim) {
   return prim;
 }
 
-function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, caption2, setCaption2) {
+var foodImg = (require('./food.png'));
+
+var helpImg = (require('./help.png'));
+
+function selectedClasses(bool) {
+  if (bool) {
+    return "p-4 border shadow bg-yellow-100";
+  } else {
+    return "p-4 border shadow ";
+  }
+}
+
+function renderImage(image) {
+  if (image) {
+    return helpImg;
+  } else {
+    return foodImg;
+  }
+}
+
+function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, caption2, setCaption2, image, setImage) {
   return React.createElement("div", undefined, React.createElement("div", {
                   className: "text-2xl font-semibold"
-                }, "Image Generator"), React.createElement("div", {
+                }, "Image Generator"), React.createElement("label", {
+                  className: "block mb-2 mt-4",
+                  htmlFor: "caption1"
+                }, "Select Image"), React.createElement("div", {
+                  className: "w-full mt-4 w-full mt-4 flex px-10 justify-between"
+                }, React.createElement("div", {
+                      className: image === /* Food */0 ? "p-4 border shadow bg-yellow-100" : "p-4 border shadow ",
+                      onClick: (function (param) {
+                          return Curry._1(setImage, (function (param) {
+                                        return /* Food */0;
+                                      }));
+                        })
+                    }, React.createElement("img", {
+                          src: foodImg
+                        })), React.createElement("div", {
+                      className: (
+                        image === /* Help */1 ? "p-4 border shadow bg-yellow-100" : "p-4 border shadow "
+                      ) + " ml-2",
+                      onClick: (function (param) {
+                          return Curry._1(setImage, (function (param) {
+                                        return /* Help */1;
+                                      }));
+                        })
+                    }, React.createElement("img", {
+                          src: helpImg
+                        }))), React.createElement("div", {
                   className: "w-full mt-4"
                 }, React.createElement("label", {
                       className: "block mb-2",
@@ -65,13 +110,14 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
                     })));
 }
 
-function renderView(caption1, caption2, time, numbers) {
+function renderView(caption1, caption2, time, numbers, image) {
   return React.createElement("div", {
-              className: "w-full bg-white",
-              id: "image-to-print"
+              className: "flex flex-col w-full items-center justifycenter"
             }, React.createElement("div", {
-                  className: "text-2xl font-semibold"
-                }, "Image"), React.createElement("div", {
+                  className: "px-10"
+                }, React.createElement("img", {
+                      src: image ? helpImg : foodImg
+                    })), React.createElement("div", {
                   className: "text-2xl font-semibold"
                 }, caption1), React.createElement("div", {
                   className: "text-4xl font-bold"
@@ -105,14 +151,19 @@ function Component1(Props) {
         }));
   var time = match$3[0];
   var match$4 = React.useState((function () {
+          return /* Food */0;
+        }));
+  var image = match$4[0];
+  var match$5 = React.useState((function () {
           return "";
         }));
-  var numbers = match$4[0];
+  var numbers = match$5[0];
   return React.createElement("div", {
               className: "h-screen flex flex-col justify-center items-center flex-wrap bg-white"
             }, React.createElement("div", {
-                  className: "max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10"
-                }, showForm ? React.createElement("div", undefined, renderForm(time, match$3[1], numbers, match$4[1], caption1, match$1[1], caption2, match$2[1])) : React.createElement("div", undefined, renderView(caption1, caption2, time, numbers))), React.createElement("div", {
+                  className: "bg-white max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10",
+                  id: "image-to-print"
+                }, showForm ? React.createElement("div", undefined, renderForm(time, match$3[1], numbers, match$5[1], caption1, match$1[1], caption2, match$2[1], image, match$4[1])) : React.createElement("div", undefined, renderView(caption1, caption2, time, numbers, image))), React.createElement("div", {
                   className: "flex justify-between"
                 }, React.createElement("div", {
                       className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4",
@@ -129,7 +180,11 @@ function Component1(Props) {
 var make = Component1;
 
 exports.str = str;
+exports.foodImg = foodImg;
+exports.helpImg = helpImg;
+exports.selectedClasses = selectedClasses;
+exports.renderImage = renderImage;
 exports.renderForm = renderForm;
 exports.renderView = renderView;
 exports.make = make;
-/* react Not a pure module */
+/* foodImg Not a pure module */
