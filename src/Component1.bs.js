@@ -3,6 +3,7 @@
 
 var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
+var Screenshot$ReactHooksTemplate = require("./screenshot.bs.js");
 
 function str(prim) {
   return prim;
@@ -66,7 +67,8 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
 
 function renderView(caption1, caption2, time, numbers) {
   return React.createElement("div", {
-              className: "w-full"
+              className: "w-full bg-white",
+              id: "image-to-print"
             }, React.createElement("div", {
                   className: "text-2xl font-semibold"
                 }, "Image"), React.createElement("div", {
@@ -89,6 +91,7 @@ function Component1(Props) {
           return true;
         }));
   var setShowForm = match[1];
+  var showForm = match[0];
   var match$1 = React.useState((function () {
           return "";
         }));
@@ -109,14 +112,18 @@ function Component1(Props) {
               className: "h-screen flex flex-col justify-center items-center flex-wrap bg-white"
             }, React.createElement("div", {
                   className: "max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10"
-                }, match[0] ? React.createElement("div", undefined, renderForm(time, match$3[1], numbers, match$4[1], caption1, match$1[1], caption2, match$2[1])) : React.createElement("div", undefined, renderView(caption1, caption2, time, numbers))), React.createElement("div", {
-                  className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4",
-                  onClick: (function (param) {
-                      return Curry._1(setShowForm, (function (form) {
-                                    return !form;
-                                  }));
-                    })
-                }, "Generate Image"));
+                }, showForm ? React.createElement("div", undefined, renderForm(time, match$3[1], numbers, match$4[1], caption1, match$1[1], caption2, match$2[1])) : React.createElement("div", undefined, renderView(caption1, caption2, time, numbers))), React.createElement("div", {
+                  className: "flex justify-between"
+                }, React.createElement("div", {
+                      className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4",
+                      onClick: (function (param) {
+                          return Curry._1(setShowForm, (function (form) {
+                                        return !form;
+                                      }));
+                        })
+                    }, "Generate Image"), showForm ? null : React.createElement(Screenshot$ReactHooksTemplate.make, {
+                        elementId: "image-to-print"
+                      })));
 }
 
 var make = Component1;

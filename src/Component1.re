@@ -64,7 +64,7 @@ let renderForm =
   </div>;
 
 let renderView = (caption1, caption2, time, numbers) =>
-  <div className="w-full">
+  <div className="w-full bg-white" id="image-to-print">
     <div className="text-2xl font-semibold"> {"Image" |> str} </div>
     <div className="text-2xl font-semibold"> {caption1 |> str} </div>
     <div className="text-4xl font-bold"> {caption2 |> str} </div>
@@ -81,6 +81,7 @@ let make = () => {
   let (caption2, setCaption2) = React.useState(() => "");
   let (time, setTime) = React.useState(() => "");
   let (numbers, setNumbers) = React.useState(() => "");
+  let elementId = "image-to-print";
   <div
     className="h-screen flex flex-col justify-center items-center flex-wrap bg-white">
     <div
@@ -104,10 +105,13 @@ let make = () => {
           <div> {renderView(caption1, caption2, time, numbers)} </div>
       }
     </div>
-    <div
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-      onClick={_ => setShowForm(form => !form)}>
-      {"Generate Image" |> str}
+    <div className="flex justify-between">
+      <div
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+        onClick={_ => setShowForm(form => !form)}>
+        {"Generate Image" |> str}
+      </div>
+      {showForm ? React.null : <Screenshot elementId />}
     </div>
   </div>;
 };
