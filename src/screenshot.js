@@ -3,11 +3,11 @@ import Download from "downloadjs";
 
 const takeAScreenshot = elementID => {
   let profile = document.getElementById(elementID);
-  HtmlToImage.toPng(profile)
+  HtmlToImage.toJpeg(profile)
     .then(function(dataUrl) {
       var img = new Image();
       img.src = dataUrl;
-      Download(dataUrl, "screenshot");
+      Download(dataUrl, "afterflood-poster");
     })
     .catch(function(error) {
       console.error("oops, something went wrong!", error);

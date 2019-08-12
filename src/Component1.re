@@ -9,7 +9,7 @@ type selectedImage =
   | Help;
 
 let selectedClasses = bool =>
-  bool ? "p-4 border shadow bg-yellow-100" : "p-4 border shadow ";
+  bool ? "p-4 border shadow bg-yellow-100 justify-between flex flex-col" : "p-4 border shadow justify-between flex flex-col ";
 
 let renderImage = image =>
   switch (image) {
@@ -34,16 +34,18 @@ let renderForm =
     <label className="block mb-2 mt-4" htmlFor="caption1">
       {"Select Image" |> str}
     </label>
-    <div className="w-full mt-4 w-full mt-4 flex px-10 justify-between">
+    <div className="w-full mt-4 w-full mt-4 flex px-10 justify-between text-center">
       <div
         onClick={_ => setImage(_ => Food)}
         className={selectedClasses(image == Food)}>
         <img src=foodImg />
+        <div  className="text-xs pt-2 font-semibold"> {"Request for Food" |> str} </div>
       </div>
       <div
         onClick={_ => setImage(_ => Help)}
         className={selectedClasses(image == Help) ++ " ml-2"}>
         <img src=helpImg />
+        <div  className="text-xs pt-2 font-semibold"> {"Request for Help" |> str} </div>
       </div>
     </div>
     <div className="w-full mt-4">
@@ -70,7 +72,7 @@ let renderForm =
         className="appearance-none h-10 mt-1 block w-full text-gray-800 border border-gray-400 rounded py-2 px-4 text-sm bg-gray-100 hover:bg-gray-200 focus:outline-none focus:bg-white focus:border-primary-400"
       />
     </div>
-    <div>
+    <div className="w-full mt-4">
       <label className="block mb-2" htmlFor="time">
         {"Message recieved at" |> str}
       </label>
@@ -84,12 +86,12 @@ let renderForm =
     </div>
     <div className="w-full mt-4">
       <label className="block mb-2" htmlFor="numbers">
-        {"number" |> str}
+        {"Name and Number" |> str}
       </label>
       <input
         id="numbers"
         value=numbers
-        placeholder="0000000000,000000000"
+        placeholder="Bodhsih 9148262104"
         onChange={event => setNumbers(ReactEvent.Form.target(event)##value)}
         className="appearance-none h-10 mt-1 block w-full text-gray-800 border border-gray-400 rounded py-2 px-4 text-sm bg-gray-100 hover:bg-gray-200 focus:outline-none focus:bg-white focus:border-primary-400"
       />
@@ -99,12 +101,15 @@ let renderForm =
 let renderView = (caption1, caption2, time, numbers, image) =>
   <div className="flex flex-col w-full items-center justifycenter">
     <div className="px-10"> <img src={renderImage(image)} /> </div>
-    <div className="text-2xl font-semibold"> {caption1 |> str} </div>
-    <div className="text-4xl font-bold"> {caption2 |> str} </div>
-    <div className="text-md"> {"Message recieved at " ++ time |> str} </div>
-    <div className="text-md"> {"Call for more info" |> str} </div>
-    <div className="text-3xl"> {numbers |> str} </div>
-    <div className="text-3xl"> {"footer" |> str} </div>
+    <div className="text-2xl font-semibold mt-2"> {caption1 |> str} </div>
+    <div className="text-3xl font-bold text-red-600"> {caption2 |> str} </div>
+    <div className="text-lg font-semibold"> {"Message recieved at " ++ time |> str} </div>
+    <div className="text-md mt-4"> {"Call for more info" |> str} </div>
+    <div className="text-2xl font-semibold"> {numbers |> str} </div>
+    <div className="text-sm text-center w-full font-bold mt-5">
+     <div>{"Visit the link to create similar poster" |> str} </div>
+     <a className="text-blue-600" href="./">{"poster.afterflood.in" |> str} </a>
+     </div>
   </div>;
 
 [@react.component]
@@ -117,7 +122,7 @@ let make = () => {
   let (numbers, setNumbers) = React.useState(() => "");
   let elementId = "image-to-print";
   <div
-    className="h-screen flex flex-col justify-center items-center flex-wrap bg-white">
+    className="mt-10 flex flex-col justify-center items-center bg-white">
     <div
       id="image-to-print"
       className="bg-white max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10">

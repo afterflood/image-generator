@@ -15,9 +15,9 @@ var helpImg = (require('./help.png'));
 
 function selectedClasses(bool) {
   if (bool) {
-    return "p-4 border shadow bg-yellow-100";
+    return "p-4 border shadow bg-yellow-100 justify-between flex flex-col";
   } else {
-    return "p-4 border shadow ";
+    return "p-4 border shadow justify-between flex flex-col ";
   }
 }
 
@@ -36,9 +36,9 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
                   className: "block mb-2 mt-4",
                   htmlFor: "caption1"
                 }, "Select Image"), React.createElement("div", {
-                  className: "w-full mt-4 w-full mt-4 flex px-10 justify-between"
+                  className: "w-full mt-4 w-full mt-4 flex px-10 justify-between text-center"
                 }, React.createElement("div", {
-                      className: image === /* Food */0 ? "p-4 border shadow bg-yellow-100" : "p-4 border shadow ",
+                      className: image === /* Food */0 ? "p-4 border shadow bg-yellow-100 justify-between flex flex-col" : "p-4 border shadow justify-between flex flex-col ",
                       onClick: (function (param) {
                           return Curry._1(setImage, (function (param) {
                                         return /* Food */0;
@@ -46,9 +46,11 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
                         })
                     }, React.createElement("img", {
                           src: foodImg
-                        })), React.createElement("div", {
+                        }), React.createElement("div", {
+                          className: "text-xs pt-2 font-semibold"
+                        }, "Request for Food")), React.createElement("div", {
                       className: (
-                        image === /* Help */1 ? "p-4 border shadow bg-yellow-100" : "p-4 border shadow "
+                        image === /* Help */1 ? "p-4 border shadow bg-yellow-100 justify-between flex flex-col" : "p-4 border shadow justify-between flex flex-col "
                       ) + " ml-2",
                       onClick: (function (param) {
                           return Curry._1(setImage, (function (param) {
@@ -57,7 +59,9 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
                         })
                     }, React.createElement("img", {
                           src: helpImg
-                        }))), React.createElement("div", {
+                        }), React.createElement("div", {
+                          className: "text-xs pt-2 font-semibold"
+                        }, "Request for Help"))), React.createElement("div", {
                   className: "w-full mt-4"
                 }, React.createElement("label", {
                       className: "block mb-2",
@@ -83,7 +87,9 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
                       onChange: (function ($$event) {
                           return Curry._1(setCaption2, $$event.target.value);
                         })
-                    })), React.createElement("div", undefined, React.createElement("label", {
+                    })), React.createElement("div", {
+                  className: "w-full mt-4"
+                }, React.createElement("label", {
                       className: "block mb-2",
                       htmlFor: "time"
                     }, "Message recieved at"), React.createElement("input", {
@@ -99,10 +105,10 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
                 }, React.createElement("label", {
                       className: "block mb-2",
                       htmlFor: "numbers"
-                    }, "number"), React.createElement("input", {
+                    }, "Name and Number"), React.createElement("input", {
                       className: "appearance-none h-10 mt-1 block w-full text-gray-800 border border-gray-400 rounded py-2 px-4 text-sm bg-gray-100 hover:bg-gray-200 focus:outline-none focus:bg-white focus:border-primary-400",
                       id: "numbers",
-                      placeholder: "0000000000,000000000",
+                      placeholder: "Bodhsih 9148262104",
                       value: numbers,
                       onChange: (function ($$event) {
                           return Curry._1(setNumbers, $$event.target.value);
@@ -118,18 +124,21 @@ function renderView(caption1, caption2, time, numbers, image) {
                 }, React.createElement("img", {
                       src: image ? helpImg : foodImg
                     })), React.createElement("div", {
-                  className: "text-2xl font-semibold"
+                  className: "text-2xl font-semibold mt-2"
                 }, caption1), React.createElement("div", {
-                  className: "text-4xl font-bold"
+                  className: "text-3xl font-bold text-red-600"
                 }, caption2), React.createElement("div", {
-                  className: "text-md"
+                  className: "text-lg font-semibold"
                 }, "Message recieved at " + time), React.createElement("div", {
-                  className: "text-md"
+                  className: "text-md mt-4"
                 }, "Call for more info"), React.createElement("div", {
-                  className: "text-3xl"
+                  className: "text-2xl font-semibold"
                 }, numbers), React.createElement("div", {
-                  className: "text-3xl"
-                }, "footer"));
+                  className: "text-sm text-center w-full font-bold mt-5"
+                }, React.createElement("div", undefined, "Visit the link to create similar poster"), React.createElement("a", {
+                      className: "text-blue-600",
+                      href: "./"
+                    }, "poster.afterflood.in")));
 }
 
 function Component1(Props) {
@@ -159,7 +168,7 @@ function Component1(Props) {
         }));
   var numbers = match$5[0];
   return React.createElement("div", {
-              className: "h-screen flex flex-col justify-center items-center flex-wrap bg-white"
+              className: "mt-10 flex flex-col justify-center items-center bg-white"
             }, React.createElement("div", {
                   className: "bg-white max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10",
                   id: "image-to-print"
