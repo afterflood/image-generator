@@ -77,7 +77,7 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
                 }, React.createElement("label", {
                       className: "block mb-2",
                       htmlFor: "caption1"
-                    }, "Requirment"), React.createElement("input", {
+                    }, "Requirement"), React.createElement("input", {
                       className: "appearance-none h-10 mt-1 block w-full text-gray-800 border border-gray-400 rounded py-2 px-4 text-sm bg-gray-100 hover:bg-gray-200 focus:outline-none focus:bg-white focus:border-primary-400",
                       id: "caption2",
                       placeholder: "Food for 100 people",

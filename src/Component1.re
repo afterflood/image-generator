@@ -61,7 +61,7 @@ let renderForm =
     </div>
     <div className="w-full mt-4">
       <label className="block mb-2" htmlFor="caption1">
-        {"Requirment" |> str}
+        {"Requirement" |> str}
       </label>
       <input
         id="caption2"
