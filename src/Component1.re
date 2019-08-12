@@ -155,5 +155,6 @@ let make = () => {
       </div>
       {showForm ? React.null : <Screenshot elementId />}
     </div>
+    <a href="https://github.com/afterflood/image-generator" target="_blank" className="mt-4 font-black text-md text-blue-600 ">{"Github" |> str}</a>
   </div>;
 };

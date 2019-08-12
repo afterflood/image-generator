@@ -183,7 +183,11 @@ function Component1(Props) {
                         })
                     }, "Generate Image"), showForm ? null : React.createElement(Screenshot$ReactHooksTemplate.make, {
                         elementId: "image-to-print"
-                      })));
+                      })), React.createElement("a", {
+                  className: "mt-4 font-black text-md text-blue-600 ",
+                  href: "https://github.com/afterflood/image-generator",
+                  target: "_blank"
+                }, "Github"));
 }
 
 var make = Component1;
