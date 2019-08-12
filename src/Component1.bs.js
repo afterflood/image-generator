@@ -29,7 +29,7 @@ function renderImage(image) {
   }
 }
 
-function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, caption2, setCaption2, image, setImage) {
+function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, caption2, setCaption2, image, setImage, contact, setContact) {
   return React.createElement("div", undefined, React.createElement("label", {
                   className: "block mb-2 mt-4",
                   htmlFor: "caption1"
@@ -103,18 +103,31 @@ function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, c
                 }, React.createElement("label", {
                       className: "block mb-2",
                       htmlFor: "numbers"
-                    }, "Name and Number"), React.createElement("input", {
+                    }, "Contact (Name and Number)"), React.createElement("input", {
                       className: "appearance-none h-10 mt-1 block w-full text-gray-800 border border-gray-400 rounded py-2 px-4 text-sm bg-gray-100 hover:bg-gray-200 focus:outline-none focus:bg-white focus:border-primary-400",
                       id: "numbers",
-                      placeholder: "Bodhsih 9148262104",
+                      placeholder: "John Doe 9998887770",
                       value: numbers,
                       onChange: (function ($$event) {
                           return Curry._1(setNumbers, $$event.target.value);
                         })
+                    })), React.createElement("div", {
+                  className: "w-full mt-4"
+                }, React.createElement("label", {
+                      className: "block mb-2",
+                      htmlFor: "contact"
+                    }, "Contact (Name and Number)"), React.createElement("input", {
+                      className: "appearance-none h-10 mt-1 block w-full text-gray-800 border border-gray-400 rounded py-2 px-4 text-sm bg-gray-100 hover:bg-gray-200 focus:outline-none focus:bg-white focus:border-primary-400",
+                      id: "contact",
+                      placeholder: "John Doe 9998887770",
+                      value: contact,
+                      onChange: (function ($$event) {
+                          return Curry._1(setContact, $$event.target.value);
+                        })
                     })));
 }
 
-function renderView(caption1, caption2, time, numbers, image) {
+function renderView(caption1, caption2, time, numbers, image, contact) {
   return React.createElement("div", {
               className: "flex flex-col w-full items-center justifycenter"
             }, React.createElement("div", {
@@ -132,6 +145,8 @@ function renderView(caption1, caption2, time, numbers, image) {
                 }, "Call for more info"), React.createElement("div", {
                   className: "text-2xl font-semibold"
                 }, numbers), React.createElement("div", {
+                  className: "text-2xl font-semibold"
+                }, contact), React.createElement("div", {
                   className: "text-sm text-center w-full font-bold mt-5"
                 }, React.createElement("div", undefined, "Visit the link to create similar poster"), React.createElement("a", {
                       className: "text-blue-600",
@@ -165,6 +180,10 @@ function Component1(Props) {
           return "";
         }));
   var numbers = match$5[0];
+  var match$6 = React.useState((function () {
+          return "";
+        }));
+  var contact = match$6[0];
   return React.createElement("div", {
               className: "mt-10 flex flex-col justify-center items-center bg-white mx-2"
             }, React.createElement("div", {
@@ -172,7 +191,7 @@ function Component1(Props) {
                 }, "Poster Creator"), React.createElement("div", {
                   className: "mt-2 bg-white max-w-xl w-full rounded-lg overflow-hidden shadow-2xl px-4 md:px-20 py-4 md:py-10",
                   id: "image-to-print"
-                }, showForm ? React.createElement("div", undefined, renderForm(time, match$3[1], numbers, match$5[1], caption1, match$1[1], caption2, match$2[1], image, match$4[1])) : React.createElement("div", undefined, renderView(caption1, caption2, time, numbers, image))), React.createElement("div", {
+                }, showForm ? React.createElement("div", undefined, renderForm(time, match$3[1], numbers, match$5[1], caption1, match$1[1], caption2, match$2[1], image, match$4[1], contact, match$6[1])) : React.createElement("div", undefined, renderView(caption1, caption2, time, numbers, image, contact))), React.createElement("div", {
                   className: "flex justify-between"
                 }, React.createElement("div", {
                       className: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4",

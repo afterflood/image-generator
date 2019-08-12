@@ -28,6 +28,8 @@ let renderForm =
       setCaption2,
       image,
       setImage,
+      contact,
+      setContact
     ) =>
   <div>
     <label className="block mb-2 mt-4" htmlFor="caption1">
@@ -85,19 +87,31 @@ let renderForm =
     </div>
     <div className="w-full mt-4">
       <label className="block mb-2" htmlFor="numbers">
-        {"Name and Number" |> str}
+        {"Contact (Name and Number)" |> str}
       </label>
       <input
         id="numbers"
         value=numbers
-        placeholder="Bodhsih 9148262104"
+        placeholder="John Doe 9998887770"
         onChange={event => setNumbers(ReactEvent.Form.target(event)##value)}
+        className="appearance-none h-10 mt-1 block w-full text-gray-800 border border-gray-400 rounded py-2 px-4 text-sm bg-gray-100 hover:bg-gray-200 focus:outline-none focus:bg-white focus:border-primary-400"
+      />
+    </div>
+    <div className="w-full mt-4">
+      <label className="block mb-2" htmlFor="contact">
+      {"Contact (Name and Number)" |> str}
+      </label>
+      <input
+        id="contact"
+        value=contact
+        placeholder="John Doe 9998887770"
+        onChange={event => setContact(ReactEvent.Form.target(event)##value)}
         className="appearance-none h-10 mt-1 block w-full text-gray-800 border border-gray-400 rounded py-2 px-4 text-sm bg-gray-100 hover:bg-gray-200 focus:outline-none focus:bg-white focus:border-primary-400"
       />
     </div>
   </div>;
 
-let renderView = (caption1, caption2, time, numbers, image) =>
+let renderView = (caption1, caption2, time, numbers, image, contact) =>
   <div className="flex flex-col w-full items-center justifycenter">
     <div className="px-10"> <img src={renderImage(image)} /> </div>
     <div className="text-2xl font-semibold mt-2"> {caption1 |> str} </div>
@@ -105,6 +119,7 @@ let renderView = (caption1, caption2, time, numbers, image) =>
     <div className="text-lg font-semibold"> {"Message recieved at " ++ time |> str} </div>
     <div className="text-md mt-4"> {"Call for more info" |> str} </div>
     <div className="text-2xl font-semibold"> {numbers |> str} </div>
+    <div className="text-2xl font-semibold"> {contact |> str} </div>
     <div className="text-sm text-center w-full font-bold mt-5">
      <div>{"Visit the link to create similar poster" |> str} </div>
      <a className="text-blue-600" href="./">{"poster.afterflood.in" |> str} </a>
@@ -119,6 +134,7 @@ let make = () => {
   let (time, setTime) = React.useState(() => "");
   let (image, setImage) = React.useState(() => Food);
   let (numbers, setNumbers) = React.useState(() => "");
+  let (contact, setContact) = React.useState(() => "");
   let elementId = "image-to-print";
   <div
     className="mt-10 flex flex-col justify-center items-center bg-white mx-2">
@@ -141,10 +157,12 @@ let make = () => {
                 setCaption2,
                 image,
                 setImage,
+                contact,
+                setContact
               )
             }
           </div> :
-          <div> {renderView(caption1, caption2, time, numbers, image)} </div>
+          <div> {renderView(caption1, caption2, time, numbers, image, contact)} </div>
       }
     </div>
     <div className="flex justify-between">
