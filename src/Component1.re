@@ -30,7 +30,6 @@ let renderForm =
       setImage,
     ) =>
   <div>
-    <div className="text-2xl font-semibold"> {"Image Generator" |> str} </div>
     <label className="block mb-2 mt-4" htmlFor="caption1">
       {"Select Image" |> str}
     </label>
@@ -122,10 +121,11 @@ let make = () => {
   let (numbers, setNumbers) = React.useState(() => "");
   let elementId = "image-to-print";
   <div
-    className="mt-10 flex flex-col justify-center items-center bg-white">
+    className="mt-10 flex flex-col justify-center items-center bg-white mx-2">
+    <div className="text-2xl font-semibold"> {"Poster Creator" |> str} </div>
     <div
       id="image-to-print"
-      className="bg-white max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10">
+      className="mt-2 bg-white max-w-xl w-full rounded-lg overflow-hidden shadow-2xl px-4 md:px-20 py-4 md:py-10">
       {
         showForm ?
           <div>

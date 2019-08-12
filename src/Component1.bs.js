@@ -30,9 +30,7 @@ function renderImage(image) {
 }
 
 function renderForm(time, setTime, numbers, setNumbers, caption1, setCaption1, caption2, setCaption2, image, setImage) {
-  return React.createElement("div", undefined, React.createElement("div", {
-                  className: "text-2xl font-semibold"
-                }, "Image Generator"), React.createElement("label", {
+  return React.createElement("div", undefined, React.createElement("label", {
                   className: "block mb-2 mt-4",
                   htmlFor: "caption1"
                 }, "Select Image"), React.createElement("div", {
@@ -168,9 +166,11 @@ function Component1(Props) {
         }));
   var numbers = match$5[0];
   return React.createElement("div", {
-              className: "mt-10 flex flex-col justify-center items-center bg-white"
+              className: "mt-10 flex flex-col justify-center items-center bg-white mx-2"
             }, React.createElement("div", {
-                  className: "bg-white max-w-xl w-full rounded overflow-hidden shadow-lg px-20 py-10",
+                  className: "text-2xl font-semibold"
+                }, "Poster Creator"), React.createElement("div", {
+                  className: "mt-2 bg-white max-w-xl w-full rounded-lg overflow-hidden shadow-2xl px-4 md:px-20 py-4 md:py-10",
                   id: "image-to-print"
                 }, showForm ? React.createElement("div", undefined, renderForm(time, match$3[1], numbers, match$5[1], caption1, match$1[1], caption2, match$2[1], image, match$4[1])) : React.createElement("div", undefined, renderView(caption1, caption2, time, numbers, image))), React.createElement("div", {
                   className: "flex justify-between"
